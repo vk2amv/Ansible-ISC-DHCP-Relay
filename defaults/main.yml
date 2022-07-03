@@ -1,0 +1,22 @@
+---
+# Deadman switch, must be set to true for role to run
+isc_dhcp_relay_run: false
+
+isc_dhcp_relay_package_state: "present"
+
+# Define upstream interfaces to relay request to
+isc_dhcp_upstream_interfaces:
+  - '{{ ansible_default_ipv4.interface }}'
+
+# Define interfaces to listen for requests on
+isc_dhcp_relay_interfaces:
+  - '{{ ansible_default_ipv4.interface }}'
+  # - 'enp1s0'
+
+# Define additional start up options
+isc_dhcp_relay_options: []
+  # - ''
+
+# Define upstream servers to relay DHCP requests to
+isc_dhcp_relay_servers:
+  - '192.168.1.1'

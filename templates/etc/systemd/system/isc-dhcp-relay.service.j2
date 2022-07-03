@@ -1,0 +1,11 @@
+[Unit]
+Description=ISC-DHCP-Relay Agent Daemon
+Documentation=man:dhcrelay(8)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/usr/sbin/dhcrelay -d --no-pid{% if isc_dhcp_relay_options is defined %}{% for option in isc_dhcp_relay_options %} {{ option }}{% endfor %}{% endif %}{% if isc_dhcp_upstream_interfaces is defined %}{% for upstream in isc_dhcp_upstream_interfaces %} -iu {{ upstream }}{% endfor %}{% endif %}{% if isc_dhcp_relay_interfaces is defined %}{% for iface in isc_dhcp_relay_interfaces %} -i {{ iface }}{% endfor %}{% endif %}{% if isc_dhcp_relay_servers is defined %}{% for server in isc_dhcp_relay_servers %} {{ server }}{% endfor %}{% endif %}
+
+[Install]
+WantedBy=multi-user.target

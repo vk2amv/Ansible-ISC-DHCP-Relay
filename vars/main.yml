@@ -1,0 +1,6 @@
+---
+
+isc_dhcp_relay_packages:
+  - "isc-dhcp-relay"
+
+isc_dhcp_relay_service_name: "isc-dhcp-relay"

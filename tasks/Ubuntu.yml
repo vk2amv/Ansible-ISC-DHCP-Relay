@@ -1,0 +1,32 @@
+---
+
+- name: Installing ISC-DHCP-Relay and dependencies
+  package:
+    name: "{{ item }}"
+    state: "{{ isc_dhcp_relay_package_state }}"
+  with_items: "{{ isc_dhcp_relay_packages }}"
+  tags:
+    - packages
+
+- name: Generate ISC-DHCP-Relay configuration
+  template:
+    src: "etc/default/isc-dhcp-relay.j2"
+    dest: "/etc/default/isc-dhcp-relay"
+
+- name: Generate ISC-DHCP-Relay systemd service
+  template:
+    src: "etc/systemd/system/isc-dhcp-relay.service.j2"
+    dest: "/etc/systemd/system/isc-dhcp-relay.service"
+  
+- name: Enable ISC-DHCP-Relay service in systemd
+  systemd:
+    name: isc-dhcp-relay
+    enabled: yes
+    masked: no
+
+- name: Reload systemd daemons and restart isc-dhcp-relay
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: isc-dhcp-relay
+

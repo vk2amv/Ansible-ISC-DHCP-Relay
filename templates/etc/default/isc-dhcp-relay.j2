@@ -1,0 +1,22 @@
+# {{ ansible_managed }}
+# Defaults for isc-dhcp-relay initscript
+# sourced by /etc/init.d/isc-dhcp-relay
+# installed at /etc/default/isc-dhcp-relay by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# What servers should the DHCP relay forward requests to?
+SERVERS="{% if isc_dhcp_relay_servers is defined %}{% for server in isc_dhcp_relay_servers %}{{ server }} {% endfor %}{% endif %}"
+
+# NOTE This option is ignored by the init.d script from main Debian repo, just including it for completeness
+# On what interface is the upstream for DHCP relay to sent request to
+UPSTREAM="{% if isc_dhcp_upstream_interfaces is defined %}{% for upstream in isc_dhcp_upstream_interfaces %}{{ upstream }} {% endfor %}{% endif %}"
+
+# On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
+INTERFACES="{% if isc_dhcp_relay_interfaces is defined %}{% for iface in isc_dhcp_relay_interfaces %}{{ iface }} {% endfor %}{% endif %}"
+
+# Additional options that are passed to the DHCP relay daemon?
+OPTIONS="{% if isc_dhcp_relay_options is defined %}{% for option in isc_dhcp_relay_options %}{{ option }} {% endfor %}{% endif %}"
+

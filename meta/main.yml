@@ -1,0 +1,23 @@
+galaxy_info:
+  role_name: isc-dhcp-relay
+  author: Lindsay Harvey
+  company: Sol1 Pty Ltd
+  description: Ansible role which installs and configures ISC DHCP Relay
+  license: MIT
+  min_ansible_version: 2.6.0
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+        - focal
+    - name: Debian
+      versions: 
+        - stretch
+        - buster
+        - bullseye
+  galaxy_tags:
+    - system
+    - managed
+    - networking
+dependencies: []
